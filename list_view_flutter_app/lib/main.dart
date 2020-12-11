@@ -3,34 +3,122 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 }
-
+/* 事前に出力するデータが揃ってる場合その1
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    // 出力するデータを記述
+    const data = [
+      Text("item0"),Text("item1"),Text("item2"),Text("item3"),Text("item4"),
+    ];
+    // 上記データを出力
+    return MaterialApp(
+      home: Scaffold(
+        body: ListView(
+            // dataを呼び出すchildrenは必須
+            children: data
+        ),
+      ),
+    );
+  }
+}
+*/
+
+/* 事前に出力するデータが揃ってる場合その2
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('ListView'),
+        ),
+        body: ListView(
+            // 事前にWidgetの一覧を作成しておくchildren必須
+            children: [
+              _menuItem("メニュー1", Icon(Icons.settings)),
+              _menuItem("メニュー2", Icon(Icons.map)),
+              _menuItem("メニュー3", Icon(Icons.room)),
+              _menuItem("メニュー4", Icon(Icons.local_shipping)),
+              _menuItem("メニュー5", Icon(Icons.airplanemode_active)),
+            ]
+        ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+
+  Widget _menuItem(String title, Icon icon) {
+    return Container(
+      decoration: new BoxDecoration(
+          border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+      ),
+      child:ListTile(
+        leading: icon,
+        title: Text(
+          title,
+          style: TextStyle(
+              color:Colors.black,
+              fontSize: 18.0
+          ),
+        ),
+        onTap: () {
+          print("onTap called.");
+        }, // タップ
+        onLongPress: () {
+          print("onLongPress called.");
+        }, // 長押し
+      ),
+    );
+  }
+}
+*/
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var list = ["メッセージ", "メッセージ", "メッセージ", "メッセージ", "メッセージ",];
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text('ListView'),
+            ),
+            body: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                if (index >= list.length) {
+                  list.addAll(["メッセージ","メッセージ","メッセージ","メッセージ",]);
+                }
+                return _messageItem(list[index]);
+              },
+            )
+        )
+    );
+  }
+
+  Widget _messageItem(String title) {
+    return Container(
+      decoration: new BoxDecoration(
+          border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+      ),
+      child:ListTile(
+        title: Text(
+          title,
+          style: TextStyle(
+              color:Colors.black,
+              fontSize: 18.0
+          ),
+        ),
+        onTap: () {
+          print("onTap called.");
+        }, // タップ
+        onLongPress: () {
+          print("onLongTap called.");
+        }, // 長押し
+      ),
     );
   }
 }
 
+/*
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -115,3 +203,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
