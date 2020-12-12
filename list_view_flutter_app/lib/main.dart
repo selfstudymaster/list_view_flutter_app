@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
 */
 
 // 表示する要素が事前にわからない場合 ListView.builder
-/*
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-*/
+
 
 // ListView.separated
 // 表示する要素が事前にわかっており、一行ごとに何か要素を差し込みたい場合に利用
@@ -179,6 +179,7 @@ class MyApp extends StatelessWidget {
 }
 */
 
+/*
 // ScrollDirection
 // スクロールの方向を変える
 class MyApp extends StatelessWidget {
@@ -221,3 +222,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+*/
